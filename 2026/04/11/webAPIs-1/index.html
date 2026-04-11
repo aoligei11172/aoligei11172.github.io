@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title> | 艾尔登之王的博客</title>
+    <title>DOM树和DOM对象 | 艾尔登之王的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1></h1>
+        <h1>DOM树和DOM对象</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -170,29 +170,41 @@
     </div>
     
     <div class="content" v-pre>
-        <hr>
-<h2 id="title-DOM树和DOM对象type-’javascript’"><a href="#title-DOM树和DOM对象type-’javascript’" class="headerlink" title="title:DOM树和DOM对象type:’javascript’"></a>title:DOM树和DOM对象<br>type:’javascript’</h2><p><strong>DOM</strong> (Document Object Model–文档对象模型）是用来呈现以及与任意HTML 或XML文档交互的API。即浏览器提供的一套专门用来 <strong>操作网页内容</strong>的功能。</p>
+        <p><strong>DOM</strong> (Document Object Model–文档对象模型）是用来呈现以及与任意HTML 或XML文档交互的API。即浏览器提供的一套专门用来 <strong>操作网页内容</strong>的功能。</p>
 <p>用于开发网页内容特效和实现<strong>用户交互</strong></p>
 <h5 id="DOM树"><a href="#DOM树" class="headerlink" title="DOM树"></a>DOM树</h5><p>将html文档以树状结构直观表现，即<strong>文档树</strong>或<strong>DOM树</strong></p>
 <h5 id="DOM对象"><a href="#DOM对象" class="headerlink" title="DOM对象"></a>DOM对象</h5><p>浏览器根据html标签生成的<strong>JS对象</strong></p>
 <p>网页所有内容都在<em>document</em>对象里</p>
 <h5 id="获取DOM元素"><a href="#获取DOM元素" class="headerlink" title="获取DOM元素"></a>获取DOM元素</h5><p><strong>1.选择匹配的第一个元素</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;css选择器&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-javascript">document.querySelector(&#39;css选择器&#39;)
+</code></pre>
 <p>返回css选择器匹配的第一个元素，一个HTMLElement对象</p>
 <p>没有则返回null</p>
 <p><strong>2.选择匹配多个元素</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;css选择器&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-javascript">document.querySelectorAll(&#39;css选择器&#39;)
+</code></pre>
 <p>返回匹配的NodeList对象集合</p>
 <p>例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">       <span class="comment">&lt;!-- 定义一个无序列表 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> lis = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;ul li&#x27;</span>);</span><br><span class="line"><span class="comment">// 获取ul中所有的li标签</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(lis);</span><br><span class="line"><span class="comment">//输出 NodeList(3) [li,li,li]</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-html">        &lt;!-- 定义一个无序列表 --&gt;
+	&lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+</code></pre>
+<pre><code class="language-javascript">const lis = document.querySelectorAll(&#39;ul li&#39;);
+// 获取ul中所有的li标签
+console.log(lis);
+//输出 NodeList(3) [li,li,li]
+</code></pre>
 <p><strong>3.其他获取DOM元素的方法</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据id获取一个元素</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">// 根据标签获取一类元素，返回类数组对象</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">// 根据类名获取元素,返回类数组对象</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-javascript">// 根据id获取一个元素
+document.getElementById(&#39;&#39;)
+// 根据标签获取一类元素，返回类数组对象
+document.getElementsByTagName(&#39;&#39;)
+// 根据类名获取元素,返回类数组对象
+document.getElementsByClassName(&#39;&#39;)
+</code></pre>
 
     </div>
     
