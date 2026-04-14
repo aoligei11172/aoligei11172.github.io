@@ -198,32 +198,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h5 id="DOM修改表单元素"><a href="#DOM修改表单元素" class="headerlink" title="DOM修改表单元素"></a>DOM修改表单元素</h5><p>使用<strong>元素.value</strong>获取表单内的值，不能使用innerHTML和innerText。</p>
-<pre><code class="language-javascript">DOM.属性名  //获取
-DOM.属性名 = 新值 //设置
-</code></pre>
-<p> 表单属性中，只有被添加和移除两种的，用bool值表示true&#x2F;false，如：disabled、checked、selected，其中存在隐式转换。如、例:</p>
-<pre><code class="language-javascript">ipt.checked = true
-ipt.checked = &#39;true&#39;
-ipt.checked = &#39;false&#39;
-//以上三种都被识别为true
-</code></pre>
-<h5 id="H5自定义属性"><a href="#H5自定义属性" class="headerlink" title="H5自定义属性"></a>H5自定义属性</h5><p>在HTML5中，可以用<strong>data-name</strong>的方式自定义属性，在DOM对象中以dataset对象获取。主要用于在HTML元素中储存额外数据。可以避免滥用class产生样式混乱，需要有合理的架构配合</p>
-<pre><code class="language-html">&amp;lt;div data-id=&quot;new&quot;&amp;gt;box&amp;lt;div&amp;gt;
-</code></pre>
-<pre><code class="language-javascript">const box = document.querySeclector(&#39;div&#39;);
-console.log(box.dataset);
-//输出名为DOMstringMap的对象
-</code></pre>
-<p><strong>修改自定义属性</strong></p>
-<p>使用dataset可以更改&#x2F;添加自定义属性，接上面</p>
-<pre><code class="language-javascript">console.log(box.dataset.id);
-//输出new
-box.dataset.other = &#39;next&#39;;
-console.log(box.dataset.id);
-//结果已添加新的自定义属性
-</code></pre>
-
+            <p>DOM修改表单的内容与其他文字内容有所不同。另外HTML5提供了自定义属性的方法。</p>
             
         </div>
     </div>
@@ -263,44 +238,6 @@ console.log(box.dataset.id);
         <div class="content" v-pre>
             
             <p>DOM对象都根据标签生成，操作标签本质上就是操作DOM对象</p>
-<h4 id="一-改变文字内容"><a href="#一-改变文字内容" class="headerlink" title="一.改变文字内容"></a>一.改变文字内容</h4><h5 id="1-对象-innerText"><a href="#1-对象-innerText" class="headerlink" title="1.对象.innerText"></a>1.对象.innerText</h5><p>将文字内容添加&#x2F;改变到任意标签位置，不解析标签。</p>
-<p>例：</p>
-<pre><code class="language-html">&amp;lt;div class=&quot;box&quot;&amp;gt;text&amp;lt;/div&amp;gt;
-&lt;!-- 声明一个文本 --&gt;
-</code></pre>
-<pre><code class="language-javascript">const box = document.querySelector(&#39;.box&#39;);
-//获取标签
-console.log(box.innerText);
-//输出 text
-box.innerText = &#39;&lt;b&gt;text&lt;/b&gt;&#39;
-//使用innerText修改文字内容
-console.log(box.innerText);
-//直接输出 &lt;b&gt;text&lt;/b&gt;，而未对字体加粗
-</code></pre>
-<h5 id="2-对象-innerHTML"><a href="#2-对象-innerHTML" class="headerlink" title="2.对象.innerHTML"></a>2.对象.innerHTML</h5><p>相比innerText，可以解析标签</p>
-<pre><code class="language-javascript">box.innerHMTL = &#39;&lt;b&gt;text&lt;/b&gt;&#39;
-//使用innerHTML修改文字内容
-//页面中text加粗
-</code></pre>
-<h4 id="二-改变元素属性"><a href="#二-改变元素属性" class="headerlink" title="二.改变元素属性"></a>二.改变元素属性</h4><h5 id="1-简单修改"><a href="#1-简单修改" class="headerlink" title="1.简单修改"></a>1.简单修改</h5><pre><code class="language-javascript">元素.属性 = 值
-</code></pre>
-<h5 id="2-通过style修改"><a href="#2-通过style修改" class="headerlink" title="2.通过style修改"></a>2.通过style修改</h5><pre><code class="language-javascript">对象.style.样式属性 = &#39;值&#39;
-</code></pre>
-<h5 id="3-通过classList"><a href="#3-通过classList" class="headerlink" title="3.通过classList"></a>3.通过classList</h5><pre><code class="language-javascript">元素.classList.add(&#39;class1&#39;,&#39;class2&#39;)
-//添加一个或多个类
-元素.classList.remove(&#39;class&#39;)
-//删除一个或多个类
-元素.classList.toggle(&#39;class&#39;,true / false)
-//切换类存在状态
-//无第二个元素:元素有该class时删除，没有该class时添加
-//第二个为true:保持该元素一定有该class
-//第二个为false:保持元素一定无该class
-元素.classList.replace(&#39;class&#39;)
-//替换类
-元素.classList.contain(&#39;class&#39;)
-//检查元素是否有该类，返回bu&#39;er&#39;zhi
-</code></pre>
-
             
         </div>
     </div>
@@ -314,7 +251,7 @@ console.log(box.innerText);
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #03a9f4">JavaScript</a>
+            <a href="/tags/javascript/" style="color: #ffa2c4">JavaScript</a>
         </span>
         
     </div>
@@ -341,40 +278,6 @@ console.log(box.innerText);
             
             <p><strong>DOM</strong> (Document Object Model–文档对象模型）是用来呈现以及与任意HTML 或XML文档交互的API。即浏览器提供的一套专门用来 <strong>操作网页内容</strong>的功能。</p>
 <p>用于开发网页内容特效和实现<strong>用户交互</strong></p>
-<h5 id="DOM树"><a href="#DOM树" class="headerlink" title="DOM树"></a>DOM树</h5><p>将html文档以树状结构直观表现，即<strong>文档树</strong>或<strong>DOM树</strong></p>
-<h5 id="DOM对象"><a href="#DOM对象" class="headerlink" title="DOM对象"></a>DOM对象</h5><p>浏览器根据html标签生成的<strong>JS对象</strong></p>
-<p>网页所有内容都在<em>document</em>对象里</p>
-<h5 id="获取DOM元素"><a href="#获取DOM元素" class="headerlink" title="获取DOM元素"></a>获取DOM元素</h5><p><strong>1.选择匹配的第一个元素</strong></p>
-<pre><code class="language-javascript">document.querySelector(&#39;css选择器&#39;)
-</code></pre>
-<p>返回css选择器匹配的第一个元素，一个HTMLElement对象</p>
-<p>没有则返回null</p>
-<p><strong>2.选择匹配多个元素</strong></p>
-<pre><code class="language-javascript">document.querySelectorAll(&#39;css选择器&#39;)
-</code></pre>
-<p>返回匹配的NodeList对象集合</p>
-<p>例：</p>
-<pre><code class="language-html">&lt;!-- 创建一个无序列表 --&gt;
-&amp;lt;ul&amp;gt;
-    &amp;lt;li&amp;gt;1&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;2&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;3&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-</code></pre>
-<pre><code class="language-javascript">const lis = document.querySelectorAll(&#39;ul li&#39;);
-// 获取ul中所有的li标签
-console.log(lis);
-//输出 NodeList(3) [li,li,li]
-</code></pre>
-<p><strong>3.其他获取DOM元素的方法</strong></p>
-<pre><code class="language-javascript">// 根据id获取一个元素
-document.getElementById(&#39;&#39;)
-// 根据标签获取一类元素，返回类数组对象
-document.getElementsByTagName(&#39;&#39;)
-// 根据类名获取元素,返回类数组对象
-document.getElementsByClassName(&#39;&#39;)
-</code></pre>
-
             
         </div>
     </div>
@@ -388,7 +291,7 @@ document.getElementsByClassName(&#39;&#39;)
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #ff7d73">JavaScript</a>
+            <a href="/tags/javascript/" style="color: #03a9f4">JavaScript</a>
         </span>
         
     </div>
