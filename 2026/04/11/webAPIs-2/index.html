@@ -225,6 +225,32 @@ console.log(box.innerText);
 元素.classList.contain(&#39;class&#39;)
 //检查元素是否有该类，返回bu&#39;er&#39;zhi
 </code></pre>
+<p>DOM修改表单的内容与其他文字内容有所不同。另外HTML5提供了自定义属性的方法。</p>
+<h5 id="DOM修改表单元素"><a href="#DOM修改表单元素" class="headerlink" title="DOM修改表单元素"></a>DOM修改表单元素</h5><p>使用<strong>元素.value</strong>获取表单内的值，不能使用innerHTML和innerText。</p>
+<pre><code class="language-javascript">DOM.属性名  //获取
+DOM.属性名 = 新值 //设置
+</code></pre>
+<p> 表单属性中，只有被添加和移除两种的，用bool值表示true&#x2F;false，如：disabled、checked、selected，其中存在隐式转换。如、例:</p>
+<pre><code class="language-javascript">ipt.checked = true
+ipt.checked = &#39;true&#39;
+ipt.checked = &#39;false&#39;
+//以上三种都被识别为true
+</code></pre>
+<h4 id="H5自定义属性"><a href="#H5自定义属性" class="headerlink" title="H5自定义属性"></a>H5自定义属性</h4><p>在HTML5中，可以用<strong>data-name</strong>的方式自定义属性，在DOM对象中以dataset对象获取。主要用于在HTML元素中储存额外数据。可以避免滥用class产生样式混乱，需要有合理的架构配合</p>
+<pre><code class="language-html">&amp;lt;div data-id=&quot;new&quot;&amp;gt;box&amp;lt;div&amp;gt;
+</code></pre>
+<pre><code class="language-javascript">const box = document.querySeclector(&#39;div&#39;);
+console.log(box.dataset);
+//输出名为DOMstringMap的对象
+</code></pre>
+<p><strong>修改自定义属性</strong></p>
+<p>使用dataset可以更改&#x2F;添加自定义属性，接上面</p>
+<pre><code class="language-javascript">console.log(box.dataset.id);
+//输出new
+box.dataset.other = &#39;next&#39;;
+console.log(box.dataset.id);
+//结果已添加新的自定义属性
+</code></pre>
 
     </div>
     
