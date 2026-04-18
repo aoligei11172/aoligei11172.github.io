@@ -200,59 +200,26 @@
             
             <h4 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h4><p><em>事件流</em>指事件完整执行过程中的流动路径，分为三个阶段：</p>
 <ol>
-<li>捕获阶段：从<code>window</code>对象向下传递到目标元素父节点，默认不触发监听器</li>
-<li>目标阶段：事件到目标元素</li>
-<li>冒泡阶段：从目标元素向上回溯到<code>window</code>，大多数事件监听在此执行</li>
-</ol>
-<h5 id="事件捕获"><a href="#事件捕获" class="headerlink" title="事件捕获"></a>事件捕获</h5><p>从DOM根元素去执行事件，代码：</p>
-<p><strong><code>DOM.addEventListener(事件类型,事件处理函数,是否使用捕获机制)</code></strong></p>
-<p>第三个参数 true &#x2F; false 是否在捕获·阶段触发监听器，通常可不写，默认false</p>
-<h5 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h5><p>当一个元素的事件被触发时,同样的事件将会在该元素的所有祖先元素中依次被触发，即当一个元素触发事件后,会依次向上调用所有父级元素的同名事件</p>
-<h5 id="阻止冒泡"><a href="#阻止冒泡" class="headerlink" title="阻止冒泡"></a>阻止冒泡</h5><p>因为默认有冒泡存在，容易导致事件影响父级元素，为把事件限制在当前元素，需要阻止事件冒泡。</p>
-<p>前提：拿到事件对象</p>
-<p>语法：<code>事件对象.stopPropagation()</code>可以阻止冒泡和捕获</p>
-<p><em>阻止默认行为</em></p>
-<p><code>event.preventDefault()</code></p>
-<h5 id="事件解绑"><a href="#事件解绑" class="headerlink" title="事件解绑"></a>事件解绑</h5><ol>
-<li>on事件，直接用null覆盖</li>
-</ol>
-<pre><code class="language-javascript">DOM.onclick = function(){}
-DOM.onclick = null
-//null直接覆盖
-</code></pre>
-<ol start="2">
-<li><p>addEventListener，必须用：</p>
-<p><code>removEventListener(事件类型,事件处理函数,{获取捕获或冒泡阶段})</code></p>
-<p>第三个参数可省略，前两个必须一致</p>
+<li><p>捕获阶段：从<code>window</code>对象向下传递到目标元素父节点，默认不触发监听器</p>
 </li>
-</ol>
-<p><strong>匿名函数无法被解绑</strong></p>
-<h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p>利用事件流的特征解决一些开发需求，减少注册次数，可以提高性能</p>
-<p>原理：利用冒泡，给父元素注册事件，触发子元素时会冒泡到父元素，触发父元素事件</p>
-<p>实现：<code>事件对象.target.tagName</code> 可以获得真正触发事件的元素</p>
-<h4 id="页面加载事件"><a href="#页面加载事件" class="headerlink" title="页面加载事件"></a>页面加载事件</h4><p>1.事件名**<code>load</code>**</p>
-<p>等待外部资源(图片、外联css和js)加载完毕时触发</p>
-<p>监听页面所有资源加载完毕：</p>
-<p><code>window.addEventListener(&#39;load&#39;,func());</code></p>
-<p>也可针对某个资源绑定load事件</p>
-<p>2.事件名**<code>DOMContentLoaded</code>**</p>
-<p>当初始的HTML文档被完全加载和解析完成之后被触发</p>
-<p>监听页面DOM加载完毕：</p>
-<p><code>document.addEventListener(&#39;DOMContentLoaded&#39;,func());</code></p>
-<h4 id="页面滚动事件"><a href="#页面滚动事件" class="headerlink" title="页面滚动事件"></a>页面滚动事件</h4><p>滚动条滚动时持续触发</p>
-<p>事件名**<code>scroll</code>**</p>
-<p>获取滚动距离：</p>
-<pre><code class="language-javascript">window.addEventListener(&#39;scroll&#39;,func() {
-	const n = document.documentElement.scrollTop;
-})
-</code></pre>
-
+<li><p>目标阶段：事件到目标元素</p>
+</li>
+<li><p>冒泡阶段：从目标元素向上回溯到<code>window</code>，大多数事件监听在此执行</p>
             
         </div>
     </div>
     <div class="post-tags">
         
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
         
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/javascript/" style="color: #ff7d73">JavaScript</a>
+        </span>
         
     </div>
     <a href="/2026/04/18/webAPIs-4/" class="go-post">阅读全文</a>
@@ -292,7 +259,7 @@ DOM.onclick = null
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #00bcd4">JavaScript</a>
+            <a href="/tags/javascript/" style="color: #ff7d73">JavaScript</a>
         </span>
         
     </div>
@@ -331,7 +298,7 @@ DOM.onclick = null
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #03a9f4">JavaScript</a>
+            <a href="/tags/javascript/" style="color: #00a596">JavaScript</a>
         </span>
         
     </div>
@@ -371,7 +338,7 @@ DOM.onclick = null
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #03a9f4">JavaScript</a>
+            <a href="/tags/javascript/" style="color: #ffa2c4">JavaScript</a>
         </span>
         
     </div>
