@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | 艾尔登之王的博客</title>
+    <title>时间对象 | 艾尔登之王的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -40,7 +40,9 @@
 
 
 
-<script src="/js/lib/search.js"></script>
+
+
+
 
 
 
@@ -152,144 +154,88 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
-    
-    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
-    
-    <div id="timeline-wrap" ref="timeline">
+            <div class="article">
+    <div>
+        <h1>时间对象</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/18
+        </span>
         
-        <div class="timeline" data-title="dom树和dom对象">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2026/4/11</div>
-                <a href="/2026/04/11/webAPIs-1/">
-                    <h3>DOM树和DOM对象</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/javascript/" style="color: #00bcd4">
-                                JavaScript
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="dom修改元素">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2026/4/11</div>
-                <a href="/2026/04/11/webAPIs-2/">
-                    <h3>DOM修改元素</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/javascript/" style="color: #00a596">
-                                JavaScript
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="dom事件监听">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2026/4/15</div>
-                <a href="/2026/04/15/webAPIs-3/">
-                    <h3>DOM事件监听</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/javascript/" style="color: #ffa2c4">
-                                JavaScript
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="事件流">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2026/4/18</div>
-                <a href="/2026/04/18/webAPIs-4/">
-                    <h3>事件流</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/javascript/" style="color: #03a9f4">
-                                JavaScript
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="时间对象">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2026/4/18</div>
-                <a href="/2026/04/18/webAPIs-5/">
-                    <h3>时间对象</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        <h5 id="时间对象"><a href="#时间对象" class="headerlink" title="时间对象"></a>时间对象</h5><p>可以获得当前系统的时间</p>
+<h5 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h5><p>使用关键字<code>new</code></p>
+<p>获得当前时间&#x2F;指定时间</p>
+<p><code>const date = new Date();</code></p>
+<h5 id="日期对象方法"><a href="#日期对象方法" class="headerlink" title="日期对象方法"></a>日期对象方法</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getFullYear()</td>
+<td>获得年份</td>
+<td>获取四位年份</td>
+</tr>
+<tr>
+<td>getMonth()</td>
+<td>获得月份</td>
+<td>取值为0~11</td>
+</tr>
+<tr>
+<td>getDate()</td>
+<td>获取月份中的每一天</td>
+<td>不同月份取值也不相同</td>
+</tr>
+<tr>
+<td>getDay()</td>
+<td>获取星期</td>
+<td>取值为0~6</td>
+</tr>
+<tr>
+<td>getHours()</td>
+<td>获取小时</td>
+<td>取值为0~23</td>
+</tr>
+<tr>
+<td>getMinutes()</td>
+<td>获取分钟</td>
+<td>取值为0~59</td>
+</tr>
+<tr>
+<td>getSeconds()</td>
+<td>获取秒</td>
+<td>取值为0~59</td>
+</tr>
+</tbody></table>
+<p>使用时需要根据返回值修改</p>
+<h5 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h5><p>指1970年1月1日00时00分00秒起到现在的毫秒数</p>
+<p><strong>获得时间戳</strong></p>
+<p>1.用getTime()</p>
+<p><code>const date = new Date()</code></p>
+<p>可以返回指定时间的时间戳</p>
+<p>2.Date.now</p>
+<p><code>console.log(Date.now())</code></p>
+<p>只能获取当前时间戳</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
             <footer id="footer">
@@ -320,6 +266,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
