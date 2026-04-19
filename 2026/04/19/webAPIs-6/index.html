@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>时间对象 | 艾尔登之王的博客</title>
+    <title>BOM | 艾尔登之王的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,14 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>时间对象</h1>
+        <h1>BOM</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/18
+            2026/4/19
         </span>
         
         
@@ -175,7 +175,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/JavaScript/" style="color: #ffa2c4">
+                <a href="/tags/JavaScript/" style="color: #03a9f4">
                     JavaScript
                 </a>
             </span>
@@ -185,65 +185,76 @@
     </div>
     
     <div class="content" v-pre>
-        <h5 id="时间对象"><a href="#时间对象" class="headerlink" title="时间对象"></a>时间对象</h5><p>可以获得当前系统的时间</p>
-<h5 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h5><p>使用关键字<code>new</code></p>
-<p>获得当前时间&#x2F;指定时间</p>
-<p><code>const date = new Date();</code></p>
-<span id="more"></span>
-
-<h5 id="日期对象方法"><a href="#日期对象方法" class="headerlink" title="日期对象方法"></a>日期对象方法</h5><table>
+        <h4 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h4><p><strong>BOM</strong>(Browser Object Model)是浏览器对象模型，核心是<code>window</code>对象，所有全局js对象、函数和变量都自动成为<code>window</code>对象的成员</p>
+<ul>
+<li><p>像document、alert()、console.log()这些都是window的属性,基本BOM的属性和方法都是window的。</p>
+</li>
+<li><p>所有通过var定义在全局作用域中的变量、函数都会变成window对象的属性和方法</p>
+</li>
+<li><p>window对象下的属性和方法调用的时候可以省略window</p>
+<span id="more"></span></li>
+</ul>
+<p><strong>location对象</strong></p>
+<p>location的数据类型是对象，拆分并保存了URL地址的各个组成部分</p>
+<p>location.href 完整的URL</p>
+<p><em>search</em></p>
+<p>获取地址中携带的参数，符号?后面的部分</p>
+<p><em>reload</em></p>
+<p>用来刷新当前页面，传入参数true表示强制刷新</p>
+<p><code>location.reload(true)</code></p>
+<p><strong>navigator对象</strong></p>
+<p>记录了浏览器自身的相关信息</p>
+<p>通过<code>userAgent</code>检测浏览器版本以及平台</p>
+<pre><code class="language-js">! (function () {
+const userAgent = navigator.userAgent
+// 验证是否为Android或iPhone
+const android = userAgent.match(/(Android) ;? [\s\/]+([\d.]+)?/)
+const iphone = userAgent.match(/(iPhone\sOS)\s([\d_]+)/)
+// 如果是Android或iPhone,则跳转至移动站点
+if (android | | iphone) {
+location.href = &#39;#&#39;}
+    })()
+</code></pre>
+<p><strong>history对象</strong></p>
+<p>管理历史记录，与浏览器地址栏的操作相对应</p>
+<table>
 <thead>
 <tr>
-<th>方法</th>
+<th>history对象方法</th>
 <th>作用</th>
-<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>getFullYear()</td>
-<td>获得年份</td>
-<td>获取四位年份</td>
+<td>back()</td>
+<td>后退</td>
 </tr>
 <tr>
-<td>getMonth()</td>
-<td>获得月份</td>
-<td>取值为0~11</td>
+<td>forward()</td>
+<td>前进</td>
 </tr>
 <tr>
-<td>getDate()</td>
-<td>获取月份中的每一天</td>
-<td>不同月份取值也不相同</td>
-</tr>
-<tr>
-<td>getDay()</td>
-<td>获取星期</td>
-<td>取值为0~6</td>
-</tr>
-<tr>
-<td>getHours()</td>
-<td>获取小时</td>
-<td>取值为0~23</td>
-</tr>
-<tr>
-<td>getMinutes()</td>
-<td>获取分钟</td>
-<td>取值为0~59</td>
-</tr>
-<tr>
-<td>getSeconds()</td>
-<td>获取秒</td>
-<td>取值为0~59</td>
+<td>go(参数)</td>
+<td>前进后退，根据参数的正负</td>
 </tr>
 </tbody></table>
-<p>使用时需要根据返回值修改</p>
-<h5 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h5><p>指1970年1月1日00时00分00秒起到现在的毫秒数</p>
-<p><strong>获得时间戳</strong></p>
-<p>1.用getTime()</p>
-<p><code>const date = new Date()</code></p>
-<p>可以返回指定时间的时间戳</p>
-<p>2.Date.now</p>
-<p><code>console.log(Date.now())</code></p>
-<p>只能获取当前时间戳</p>
+<p><strong>本地存储</strong></p>
+<p><em><u>localStorage</u></em></p>
+<p>可以将数据永久存储在本地(用户的电脑),除非手动删除,否则关闭页面也会存在</p>
+<p><em>存储&#x2F;修改数据</em></p>
+<p><code>localStorage.setItem(key,value)</code></p>
+<p><em>读取数据</em></p>
+<p><code>localStorage.getItem(key)</code></p>
+<p><em>删除数据</em></p>
+<p><code>localStorage.removeItem(key)</code></p>
+<p> <em><u>sessionStorage</u></em></p>
+<p>生命周期为关闭浏览器窗口，同一个页面下数据可以共享</p>
+<p>用法同<code>localStorage</code></p>
+<p><strong>复杂数据类型</strong></p>
+<p>存储需要将复杂数据类型转换成JSON字符串，再存储到本地</p>
+<p>语法：<code>JSON.stringify</code></p>
+<p><code>localStorage.setItem(&#39;obj&#39;, JSON.stringify(obj))</code></p>
+<p>读取数据需要从JSON字符串转回对象</p>
+<p><code>JSON.parse(localstorage.getItem(&#39;obj&#39;))</code></p>
 
     </div>
     
