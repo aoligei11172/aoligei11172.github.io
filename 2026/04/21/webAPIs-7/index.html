@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>时间对象 | 艾尔登之王的博客</title>
+    <title>正则表达式 | 艾尔登之王的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,14 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>时间对象</h1>
+        <h1>正则表达式</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/18
+            2026/4/21
         </span>
         
         
@@ -175,7 +175,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/JavaScript/" style="color: #00bcd4">
+                <a href="/tags/JavaScript/" style="color: #00a596">
                     JavaScript
                 </a>
             </span>
@@ -185,65 +185,44 @@
     </div>
     
     <div class="content" v-pre>
-        <h5 id="时间对象"><a href="#时间对象" class="headerlink" title="时间对象"></a>时间对象</h5><p>可以获得当前系统的时间</p>
-<h5 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h5><p>使用关键字<code>new</code></p>
-<p>获得当前时间&#x2F;指定时间</p>
-<p><code>const date = new Date();</code></p>
+        <h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p><strong>正则表达式</strong>(Regular Expression)是用于匹配字符串中字符组合的模式。在JavaScript中,正则表达式也是对象</p>
+<p>通常用来查找、替换那些符合正则表达式的文本,许多语言都支持正则表达式。</p>
 <span id="more"></span>
 
-<h5 id="日期对象方法"><a href="#日期对象方法" class="headerlink" title="日期对象方法"></a>日期对象方法</h5><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>作用</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>getFullYear()</td>
-<td>获得年份</td>
-<td>获取四位年份</td>
-</tr>
-<tr>
-<td>getMonth()</td>
-<td>获得月份</td>
-<td>取值为0~11</td>
-</tr>
-<tr>
-<td>getDate()</td>
-<td>获取月份中的每一天</td>
-<td>不同月份取值也不相同</td>
-</tr>
-<tr>
-<td>getDay()</td>
-<td>获取星期</td>
-<td>取值为0~6</td>
-</tr>
-<tr>
-<td>getHours()</td>
-<td>获取小时</td>
-<td>取值为0~23</td>
-</tr>
-<tr>
-<td>getMinutes()</td>
-<td>获取分钟</td>
-<td>取值为0~59</td>
-</tr>
-<tr>
-<td>getSeconds()</td>
-<td>获取秒</td>
-<td>取值为0~59</td>
-</tr>
-</tbody></table>
-<p>使用时需要根据返回值修改</p>
-<h5 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h5><p>指1970年1月1日00时00分00秒起到现在的毫秒数</p>
-<p><strong>获得时间戳</strong></p>
-<p>1.用getTime()</p>
-<p><code>const date = new Date()</code></p>
-<p>可以返回指定时间的时间戳</p>
-<p>2.Date.now</p>
-<p><code>console.log(Date.now())</code></p>
-<p>只能获取当前时间戳</p>
+<p>可用于验证表单，过滤敏感词</p>
+<p>定义：<br><code>const 变量名 = /表达式/</code></p>
+<p>&#x2F;  &#x2F;是正则表达式字面量</p>
+<p>判断是否有符合规则的字符串：</p>
+<p>test()，语法：</p>
+<p><code>正则名.test(被检测的字符串)</code> 返回true&#x2F;false</p>
+<p>检索符合规则的字符串</p>
+<p>exec()</p>
+<p><code>正则名.exec(被检索的字符串) </code>找到则返回数组（包含匹配文本、捕获组及元数据），没找到返回null</p>
+<h5 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h5><p>是一些具有特殊含义的字符，提高灵活性和匹配功能</p>
+<pre><code>^ 匹配字符串开头
+￥ 匹配字符串结尾    //^$在一起则精确匹配
+* 重复零次或多次
++ 重复一次或多次
+? 重复零次或一次
+{n} 重复n次
+{n,} 重复大于等于n次
+{n,m} 重复n到m次
+[ ] 匹配任意一个字符 //如[abc]{3}可匹配包含abc长度为3的字符串
+[ - ] 表示一个范围 //如[1-9]匹配数字1-9,[a-zA-Z]匹配大小写字母
+[]里加上^ 取反
+/d 匹配0-9的数字，相当于[0,9]
+/D 匹配0-9之外的字符，相当于[^0-9]
+/w 匹配字母数字和下划线 [A-Za-z0-9_]
+/W 匹配字母数字和下划线之外的字符 [^A-Za-z0-9_]
+/s 匹配空格(包括换行符、制表符、空格符) [\t\r\n\v\f]
+/S 匹配非空格 [^\t\r\n\v\f]
+g 查找所有匹配项
+i 不区分大小写
+m ^$能匹配多行
+| 或
+</code></pre>
+<p>替换<strong>replace</strong></p>
+<p>语法：<code>字符串.replace(/正则表达式/,&#39;替换的文本&#39;)</code></p>
 
     </div>
     
