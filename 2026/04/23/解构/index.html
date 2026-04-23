@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>事件流 | 艾尔登之王的博客</title>
+    <title>解构 | 艾尔登之王的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,23 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>事件流</h1>
+        <h1>解构</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/18
-        </span>
-        
-        <span class="category">
-            <a href="/categories/webAPIs/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                webAPIs
-            </a>
+            2026/4/23
         </span>
         
         
@@ -184,7 +175,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/JavaScript/" style="color: #ff7d73">
+                <a href="/tags/JavaScript/" style="color: #00bcd4">
                     JavaScript
                 </a>
             </span>
@@ -194,56 +185,45 @@
     </div>
     
     <div class="content" v-pre>
-        <h4 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h4><p><em>事件流</em>指事件完整执行过程中的流动路径，分为三个阶段：</p>
-<ol>
-<li><p>捕获阶段：从<code>window</code>对象向下传递到目标元素父节点，默认不触发监听器</p>
-</li>
-<li><p>目标阶段：事件到目标元素</p>
-</li>
-<li><p>冒泡阶段：从目标元素向上回溯到<code>window</code>，大多数事件监听在此执行</p>
-<span id="more"></span></li>
-</ol>
-<h5 id="事件捕获"><a href="#事件捕获" class="headerlink" title="事件捕获"></a>事件捕获</h5><p>从DOM根元素去执行事件，代码：</p>
-<p><strong><code>DOM.addEventListener(事件类型,事件处理函数,是否使用捕获机制)</code></strong></p>
-<p>第三个参数 true &#x2F; false 是否在捕获·阶段触发监听器，通常可不写，默认false</p>
-<h5 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h5><p>当一个元素的事件被触发时,同样的事件将会在该元素的所有祖先元素中依次被触发，即当一个元素触发事件后,会依次向上调用所有父级元素的同名事件</p>
-<h5 id="阻止冒泡"><a href="#阻止冒泡" class="headerlink" title="阻止冒泡"></a>阻止冒泡</h5><p>因为默认有冒泡存在，容易导致事件影响父级元素，为把事件限制在当前元素，需要阻止事件冒泡。</p>
-<p>前提：拿到事件对象</p>
-<p>语法：<code>事件对象.stopPropagation()</code>可以阻止冒泡和捕获</p>
-<p><em>阻止默认行为</em></p>
-<p><code>event.preventDefault()</code></p>
-<h5 id="事件解绑"><a href="#事件解绑" class="headerlink" title="事件解绑"></a>事件解绑</h5><ol>
-<li>on事件，直接用null覆盖</li>
-</ol>
-<pre><code class="language-javascript">DOM.onclick = function(){}
-DOM.onclick = null
-//null直接覆盖
+        <p><strong>解构</strong>是ES6引入的语法糖，可以从数组或对象中提取值并赋给变量，使代码更简洁、可读性更高，是一种<em>优雅</em>的语法。</p>
+<p>解构变量如果是新声明的变量则不能和已有变量冲突。</p>
+<span id="more"></span>
+
+<h4 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h4><p>将数组元素快速批量赋给一系列变量。</p>
+<p>例：</p>
+<pre><code class="language-javascript">const arr = [100,60,80];
+const [max,min,avg] = arr;
 </code></pre>
-<ol start="2">
-<li><p>addEventListener，必须用：</p>
-<p><code>removEventListener(事件类型,事件处理函数,{获取捕获或冒泡阶段})</code></p>
-<p>第三个参数可省略，前两个必须一致</p>
-</li>
-</ol>
-<p><strong>匿名函数无法被解绑</strong></p>
-<h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p>利用事件流的特征解决一些开发需求，减少注册次数，可以提高性能</p>
-<p>原理：利用冒泡，给父元素注册事件，触发子元素时会冒泡到父元素，触发父元素事件</p>
-<p>实现：<code>事件对象.target.tagName</code> 可以获得真正触发事件的元素</p>
-<h4 id="页面加载事件"><a href="#页面加载事件" class="headerlink" title="页面加载事件"></a>页面加载事件</h4><p>1.事件名**<code>load</code>**</p>
-<p>等待外部资源(图片、外联css和js)加载完毕时触发</p>
-<p>监听页面所有资源加载完毕：</p>
-<p><code>window.addEventListener(&#39;load&#39;,func());</code></p>
-<p>也可针对某个资源绑定load事件</p>
-<p>2.事件名**<code>DOMContentLoaded</code>**</p>
-<p>当初始的HTML文档被完全加载和解析完成之后被触发</p>
-<p>监听页面DOM加载完毕：</p>
-<p><code>document.addEventListener(&#39;DOMContentLoaded&#39;,func());</code></p>
-<h4 id="页面滚动事件"><a href="#页面滚动事件" class="headerlink" title="页面滚动事件"></a>页面滚动事件</h4><p>滚动条滚动时持续触发</p>
-<p>事件名**<code>scroll</code>**</p>
-<p>获取滚动距离：</p>
-<pre><code class="language-javascript">window.addEventListener(&#39;scroll&#39;,func() {
-	const n = document.documentElement.scrollTop;
-})
+<p>变量数大于单元值数，多余的变量赋为undefined，</p>
+<p>变量数小于单元值数，多余的单元值不会被赋给变量，可用剩余变量获取</p>
+<p>防止undefined，可设置默认值：</p>
+<p><code>const [a = 0,b = 0] = [1,2]</code></p>
+<p>根据需求可使用空格跳过不需要的单元值：</p>
+<p><code>const [a,b, ,d] = [1,2,3,4]</code></p>
+<h4 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h4><p>将对象属性和方法快速批量赋值给一系列变量</p>
+<p>把对象里的属性取出来放到变量里，<strong>左边的变量名必须和右边的属性名一模一样</strong></p>
+<pre><code class="language-javascript">const {name,age} = {name: &#39;d4c&#39;,age: 18}
+</code></pre>
+<p>对象解构可以从一个对象中提取变量并同时修改新的变量名</p>
+<p>什么值: 赋给谁</p>
+<pre><code class="language-javascript">const obj = {
+    uname: &#39;A&#39;,
+    age: 18    
+    };
+const {uname: name } = obj;
+console.log(name); //输出&quot;A&quot;
+</code></pre>
+<p><strong>数组对象解构</strong></p>
+<pre><code class="language-javascript">const [{name,age}] = [{name: &#39;d4c&#39;,age: 18}]
+</code></pre>
+<p><strong>多级对象解构</strong></p>
+<pre><code class="language-javascript">const obj1 = {
+	a: &#39;A&#39;
+    obj2:{
+		b:&#39;B&#39;
+}
+}
+const {a , obj2:{b}} = obj1
 </code></pre>
 
     </div>
