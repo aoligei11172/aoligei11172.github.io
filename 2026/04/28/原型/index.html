@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>正则表达式 | 艾尔登之王的博客</title>
+    <title>原型 | 艾尔登之王的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,14 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>正则表达式</h1>
+        <h1>原型</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/21
+            2026/4/28
         </span>
         
         
@@ -185,44 +185,61 @@
     </div>
     
     <div class="content" v-pre>
-        <h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p><strong>正则表达式</strong>(Regular Expression)是用于匹配字符串中字符组合的模式。在JavaScript中,正则表达式也是对象</p>
-<p>通常用来查找、替换那些符合正则表达式的文本,许多语言都支持正则表达式。</p>
+        <h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p>构造函数通过原型分配的函数是所有对象所共享的。</p>
+<p>JavaScript规定,每一个构造函数都有一个<strong>prototype</strong>属性,指向另一个对象，即原型对象。</p>
+<p>可以将公共的方法定义在<strong>prototype</strong>对象上</p>
 <span id="more"></span>
 
-<p>可用于验证表单，过滤敏感词</p>
-<p>定义：<br><code>const 变量名 = /表达式/</code></p>
-<p>&#x2F;  &#x2F;是正则表达式字面量</p>
-<p>判断是否有符合规则的字符串：</p>
-<p>test()，语法：</p>
-<p><code>正则名.test(被检测的字符串)</code> 返回true&#x2F;false</p>
-<p>检索符合规则的字符串</p>
-<p>exec()</p>
-<p><code>正则名.exec(被检索的字符串) </code>找到则返回数组（包含匹配文本、捕获组及元数据），没找到返回null</p>
-<h5 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h5><p>是一些具有特殊含义的字符，提高灵活性和匹配功能</p>
-<pre><code>^ 匹配字符串开头
-$ 匹配字符串结尾    //^$在一起则精确匹配
-* 重复零次或多次
-+ 重复一次或多次
-? 重复零次或一次
-{n} 重复n次
-{n,} 重复大于等于n次
-{n,m} 重复n到m次
-[ ] 匹配任意一个字符 //如[abc]{3}可匹配包含abc长度为3的字符串
-[ - ] 表示一个范围 //如[1-9]匹配数字1-9,[a-zA-Z]匹配大小写字母
-[]里加上^ 取反
-/d 匹配0-9的数字，相当于[0,9]
-/D 匹配0-9之外的字符，相当于[^0-9]
-/w 匹配字母数字和下划线 [A-Za-z0-9_]
-/W 匹配字母数字和下划线之外的字符 [^A-Za-z0-9_]
-/s 匹配空格(包括换行符、制表符、空格符) [\t\r\n\v\f]
-/S 匹配非空格 [^\t\r\n\v\f]
-g 查找所有匹配项
-i 不区分大小写
-m ^$能匹配多行
-| 或
+<p>例：</p>
+<pre><code class="language-javascript">    function Person(name,age){
+        this.name = name;
+        this.age = age;
+    } //定义构造函数
+    Person.prototype.sayname = function(){
+        console.log(`${this.name}`);
+    } //在原型变量上构造函数
+	const A = new Person(&#39;张三&#39;,18); //定义对象
+	A.sayname();  //输出 张三
 </code></pre>
-<p>替换<strong>replace</strong></p>
-<p>语法：<code>字符串.replace(/正则表达式/,&#39;替换的文本&#39;)</code></p>
+<h4 id="constructor属性"><a href="#constructor属性" class="headerlink" title="constructor属性"></a>constructor属性</h4><p><code>prototype</code>中的<code>constructor</code>属性，指向构造函数</p>
+<pre><code class="language-javascript">    function Person(name){
+        this.name = name;
+    }
+	console.log(Person.prototype.constructor === Person); //返回 true
+</code></pre>
+<p>用全新字面量修改<code>prototype</code>会让<code>constructor</code>丢失，故应该手动添加<code>constructor</code>指向原来的构造函数</p>
+<pre><code class="language-javascript">    Person.prototype = {
+        say : function (){
+            console.log(&#39;say&#39;)
+        },
+        constructor : Person
+    }
+    console.log(Person.prototype.constructor 	=== Person) //返回true
+</code></pre>
+<h4 id="proto"><a href="#proto" class="headerlink" title="__proto__"></a>__proto__</h4><p>对象中都有一个属性<code>__proto__</code>指向构造函数的<code>prototype</code>，可以让对象使用原型对象的属性和方法</p>
+<p><code>实例.__proto__ === 构造函数.prototype</code></p>
+<pre><code class="language-javascript">    function Person(){}
+	console.log(Person.__proto__ === 			Function.prototype); //输出true
+</code></pre>
+<h4 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h4><p>通过原型链实现属性和方法的共享与查找。</p>
+<pre><code class="language-javascript">const Person = {
+	eyes: 2,
+}
+function Man() {}
+Man.prototype = new Person;
+Man.prototype.constructor = Man;
+</code></pre>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p>原型链是JavaScript实现对象继承的核心机制，通过对象的内部属性[[Prototype]]形成链式结构，使对象能够继承其他对象的属性和方法。</p>
+<p>当访问一个对象的属性时，JavaScript引擎按以下流程查找：</p>
+<ol>
+<li>先在对象自身查找 - 检查对象自身的”显示属性”</li>
+<li>若未找到，则通过__proto__在构造函数原型上查找</li>
+<li>若仍找不到，继续向上查找原型的原型</li>
+<li>直到找到Object.prototype（其__proto__为null，链的终点）</li>
+</ol>
+<h5 id="instanceof运算符"><a href="#instanceof运算符" class="headerlink" title="instanceof运算符"></a>instanceof运算符</h5><p>用于检测“原型链”关系，检测构造函数的<code>prototype</code>属性是否出现在某个实例对象的原型链上</p>
+<pre><code class="language-javascript">console.log(Array instanceof Object) //返回true
+</code></pre>
 
     </div>
     
