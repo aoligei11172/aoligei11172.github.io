@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>正则表达式 | 艾尔登之王的博客</title>
+    <title>TypeScript入门 | 艾尔登之王的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,14 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>正则表达式</h1>
+        <h1>TypeScript入门</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/21
+            2026/5/10
         </span>
         
         
@@ -175,8 +175,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/JavaScript/" style="color: #ffa2c4">
-                    JavaScript
+                <a href="/tags/typescript/" style="color: #ffa2c4">
+                    typescript
                 </a>
             </span>
             
@@ -185,44 +185,85 @@
     </div>
     
     <div class="content" v-pre>
-        <h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p><strong>正则表达式</strong>(Regular Expression)是用于匹配字符串中字符组合的模式。在JavaScript中,正则表达式也是对象</p>
-<p>通常用来查找、替换那些符合正则表达式的文本,许多语言都支持正则表达式。</p>
+        <p>TypeScript是 JavaScript 的超集，意味着任何有效的 JavaScript 代码也是有效的 TypeScript 代码。</p>
 <span id="more"></span>
 
-<p>可用于验证表单，过滤敏感词</p>
-<p>定义：<br><code>const 变量名 = /表达式/</code></p>
-<p>&#x2F;  &#x2F;是正则表达式字面量</p>
-<p>判断是否有符合规则的字符串：</p>
-<p>test()，语法：</p>
-<p><code>正则名.test(被检测的字符串)</code> 返回true&#x2F;false</p>
-<p>检索符合规则的字符串</p>
-<p>exec()</p>
-<p><code>正则名.exec(被检索的字符串) </code>找到则返回数组（包含匹配文本、捕获组及元数据），没找到返回null</p>
-<h5 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h5><p>是一些具有特殊含义的字符，提高灵活性和匹配功能</p>
-<pre><code>^ 匹配字符串开头
-$ 匹配字符串结尾    //^$在一起则精确匹配
-* 重复零次或多次
-+ 重复一次或多次
-? 重复零次或一次
-{n} 重复n次
-{n,} 重复大于等于n次
-{n,m} 重复n到m次
-[ ] 匹配任意一个字符 //如[abc]{3}可匹配包含abc长度为3的字符串
-[ - ] 表示一个范围 //如[1-9]匹配数字1-9,[a-zA-Z]匹配大小写字母
-[]里加上^ 取反
-/d 匹配0-9的数字，相当于[0,9]
-/D 匹配0-9之外的字符，相当于[^0-9]
-/w 匹配字母数字和下划线 [A-Za-z0-9_]
-/W 匹配字母数字和下划线之外的字符 [^A-Za-z0-9_]
-/s 匹配空格(包括换行符、制表符、空格符) [\t\r\n\v\f]
-/S 匹配非空格 [^\t\r\n\v\f]
-g 查找所有匹配项
-i 不区分大小写
-m ^$能匹配多行
-| 或
+<p>TS具有静态类型检查，编译时检查，不用等到运行时报错</p>
+<p>TS需要转换成js才能运行，在终端中操作</p>
+<p>手动转化：</p>
+<pre><code class="language-bash">tsc index.ts
 </code></pre>
-<p>替换<strong>replace</strong></p>
-<p>语法：<code>字符串.replace(/正则表达式/,&#39;替换的文本&#39;)</code></p>
+<p>自动转化：</p>
+<pre><code class="language-bash">tsc --watch
+</code></pre>
+<h4 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h4><p>变量声明以let和const为主</p>
+<pre><code class="language-typescript">let 变量名: 类型 = 初始值;
+const 常量名: 类型 = 值;   
+</code></pre>
+<p>类型名推荐小写</p>
+<h4 id="新增类型"><a href="#新增类型" class="headerlink" title="新增类型"></a>新增类型</h4><p><strong>any</strong></p>
+<p>任意类型，意味着放弃了对该变量的类型检查。</p>
+<p>any类型的变量可以赋值给任意类型的变量</p>
+<p>例如:</p>
+<pre><code class="language-typescript">let a: any
+a = false
+let b: string
+b = a
+console.log(b) //打印false
+</code></pre>
+<p><strong>unknown</strong></p>
+<p>未知类型，相当于安全的any</p>
+<p>不能直接赋值或使用某种变量类型的方法，需要判断类型:</p>
+<pre><code class="language-typescript">let a: unknown
+a = &#39;hello&#39;
+let b: string
+if(typeof a === &#39;string&#39;) x=a //方法1
+x = a as string //方法2
+x = &lt;string&gt;a //方法3
+</code></pre>
+<p><strong>never</strong></p>
+<p>不能被赋任何值，包括undefined，null等</p>
+<p><strong>void</strong></p>
+<p>用于函数，表示函数的返回值为空</p>
+<p>可以无返回值或者返回undefined</p>
+<p><strong>tuple</strong></p>
+<p>tuple(元组)是一种特殊数组类型，可以存储固定数量的元素且类型已知，可以不同。?表示可选元素。不是关键字</p>
+<p>声明：</p>
+<pre><code class="language-typescript">let arr1: [string,number]
+let arr2: [number,...string[]]
+</code></pre>
+<p><strong>enum</strong></p>
+<p>enum枚举可以定义一组命名常量，支持双向映射(仅限数字枚举)</p>
+<p>声明：</p>
+<pre><code class="language-typescript">enum Direction {
+  Up,      // 默认值 0
+  Down,    // 1
+  Left,    // 2
+  Right    // 3
+}
+
+let move: Direction = Direction.Up;
+console.log(Direction);
+//  { &quot;0&quot;: &quot;Up&quot;, &quot;1&quot;: &quot;Down&quot;, &quot;2&quot;: &quot;Left&quot;, &quot;3&quot;: &quot;Right&quot;, &quot;Up&quot;: 0, &quot;Down&quot;: 1, &quot;Left&quot;: 2, &quot;Right&quot;: 3 }双向映射
+console.log(move);        // 0
+console.log(Direction[0]); // &quot;Up&quot;（反向映射）
+</code></pre>
+<p>常量枚举：enum前加const，让ts编译时将枚举成员引用替换成真实值而不是额外生成对象，减少代码量</p>
+<p><strong>type</strong></p>
+<p>用于定义类型别名，适用于任何类型</p>
+<pre><code class="language-typescript">type MyString = string;
+type Point = { x: number; y: number };
+type Callback = (data: string) =&gt; void;
+type Coord = [number, number, number?];  // 可选元组
+</code></pre>
+<p><em>联合类型</em></p>
+<pre><code class="language-typescript">type a = number | string
+</code></pre>
+<p><em>合并类型</em></p>
+<pre><code class="language-typescript">type A = {a: number}
+type B = {b: string}
+type C = A &amp; B
+</code></pre>
 
     </div>
     
