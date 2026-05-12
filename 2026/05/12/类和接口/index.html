@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>事件流 | 艾尔登之王的博客</title>
+    <title>typescript 类和接口 | 艾尔登之王的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,23 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>事件流</h1>
+        <h1>typescript 类和接口</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/18
-        </span>
-        
-        <span class="category">
-            <a href="/categories/webAPIs/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                webAPIs
-            </a>
+            2026/5/12
         </span>
         
         
@@ -184,8 +175,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/JavaScript/" style="color: #ff7d73">
-                    JavaScript
+                <a href="/tags/typescript/" style="color: #03a9f4">
+                    typescript
                 </a>
             </span>
             
@@ -194,56 +185,77 @@
     </div>
     
     <div class="content" v-pre>
-        <h4 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h4><p><em>事件流</em>指事件完整执行过程中的流动路径，分为三个阶段：</p>
-<ol>
-<li><p>捕获阶段：从<code>window</code>对象向下传递到目标元素父节点，默认不触发监听器</p>
-</li>
-<li><p>目标阶段：事件到目标元素</p>
-</li>
-<li><p>冒泡阶段：从目标元素向上回溯到<code>window</code>，大多数事件监听在此执行</p>
-<span id="more"></span></li>
-</ol>
-<h5 id="事件捕获"><a href="#事件捕获" class="headerlink" title="事件捕获"></a>事件捕获</h5><p>从DOM根元素去执行事件，代码：</p>
-<p><strong><code>DOM.addEventListener(事件类型,事件处理函数,是否使用捕获机制)</code></strong></p>
-<p>第三个参数 true &#x2F; false 是否在捕获·阶段触发监听器，通常可不写，默认false</p>
-<h5 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h5><p>当一个元素的事件被触发时,同样的事件将会在该元素的所有祖先元素中依次被触发，即当一个元素触发事件后,会依次向上调用所有父级元素的同名事件</p>
-<h5 id="阻止冒泡"><a href="#阻止冒泡" class="headerlink" title="阻止冒泡"></a>阻止冒泡</h5><p>因为默认有冒泡存在，容易导致事件影响父级元素，为把事件限制在当前元素，需要阻止事件冒泡。</p>
-<p>前提：拿到事件对象</p>
-<p>语法：<code>事件对象.stopPropagation()</code>可以阻止冒泡和捕获</p>
-<p><em>阻止默认行为</em></p>
-<p><code>event.preventDefault()</code></p>
-<h5 id="事件解绑"><a href="#事件解绑" class="headerlink" title="事件解绑"></a>事件解绑</h5><ol>
-<li>on事件，直接用null覆盖</li>
-</ol>
-<pre><code class="language-javascript">DOM.onclick = function(){}
-DOM.onclick = null
-//null直接覆盖
+        <h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p><strong>类</strong>(class)是面向对象编程的核心，是一种基于原型链的语法糖。</p>
+<span id="more"></span>
+
+<p>定义：</p>
+<pre><code class="language-typescript">class Person{
+	name: string;
+    age: number;
+    constructor(name:string,age:number){
+        this.name=name;
+        this.age=age;
+}
+}
 </code></pre>
-<ol start="2">
-<li><p>addEventListener，必须用：</p>
-<p><code>removEventListener(事件类型,事件处理函数,{获取捕获或冒泡阶段})</code></p>
-<p>第三个参数可省略，前两个必须一致</p>
-</li>
-</ol>
-<p><strong>匿名函数无法被解绑</strong></p>
-<h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p>利用事件流的特征解决一些开发需求，减少注册次数，可以提高性能</p>
-<p>原理：利用冒泡，给父元素注册事件，触发子元素时会冒泡到父元素，触发父元素事件</p>
-<p>实现：<code>事件对象.target.tagName</code> 可以获得真正触发事件的元素</p>
-<h4 id="页面加载事件"><a href="#页面加载事件" class="headerlink" title="页面加载事件"></a>页面加载事件</h4><p>1.事件名**<code>load</code>**</p>
-<p>等待外部资源(图片、外联css和js)加载完毕时触发</p>
-<p>监听页面所有资源加载完毕：</p>
-<p><code>window.addEventListener(&#39;load&#39;,func());</code></p>
-<p>也可针对某个资源绑定load事件</p>
-<p>2.事件名**<code>DOMContentLoaded</code>**</p>
-<p>当初始的HTML文档被完全加载和解析完成之后被触发</p>
-<p>监听页面DOM加载完毕：</p>
-<p><code>document.addEventListener(&#39;DOMContentLoaded&#39;,func());</code></p>
-<h4 id="页面滚动事件"><a href="#页面滚动事件" class="headerlink" title="页面滚动事件"></a>页面滚动事件</h4><p>滚动条滚动时持续触发</p>
-<p>事件名**<code>scroll</code>**</p>
-<p>获取滚动距离：</p>
-<pre><code class="language-javascript">window.addEventListener(&#39;scroll&#39;,func() {
-	const n = document.documentElement.scrollTop;
-})
+<p>也可简写成：</p>
+<pre><code class="language-typescript">class Person{
+	constructor(public name:string,public age:number){}
+}
+</code></pre>
+<h4 id="类修饰符"><a href="#类修饰符" class="headerlink" title="类修饰符"></a>类修饰符</h4><p><strong>public</strong></p>
+<p>默认，任何地方可以访问</p>
+<p><strong>protected</strong></p>
+<p>当前类及子类内部可以访问</p>
+<p><strong>private</strong></p>
+<p>仅当前类内部可以访问</p>
+<p><strong>readonly</strong></p>
+<p>只读，不可修改</p>
+<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><p>抽象类用abstract声明，不能被实例化，只能作为其他类的父类，其中部分方法已实现，部分方法只声明不实现(抽象方法)，用abstract声明，由子类完成</p>
+<p>定义：</p>
+<pre><code class="language-typescript">abstract class Package {
+	constructor(public weight: number) {}
+    printPackage(){
+        console.log(`weight: $(this.weight`)
+    } //已实现方法
+    abstract calculate(): number
+    //未实现方法
+}
+</code></pre>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p><strong>接口（Interface）是</strong>一种定义结构的方式。只能定义格式，不包含任何实现</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p><strong>对象和类</strong></p>
+<p>对象和类都通过interface关键字定义 ，但声明具体内容有所不同</p>
+<pre><code class="language-typescript">interface IPerson {
+	name: string;
+    age: number;
+    speak(n: number): void;
+}
+
+class Person implements IPerson{
+	constructor(public name: string,public age:number) {}
+    speak(n: number):void {
+		console.log(`${n}`)
+    }
+}  //接口定义类
+const User: IPerson = {
+	name: &quot;张三&quot;,
+    age: 18,
+    speak(n) {}
+} //接口定义对象
+</code></pre>
+<p><strong>函数</strong></p>
+<pre><code class="language-typescript">interface Count{
+    (a:number,b:number): number;
+} //定义函数参数和返回值类型
+</code></pre>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>接口之间可以用extends关键字来继承</p>
+<pre><code class="language-typescript">interface PersonI {
+    name: string;
+}
+interface Person extends PersonI {
+	age: number;
+    //继承PersonI，自带name属性
+}
 </code></pre>
 
     </div>

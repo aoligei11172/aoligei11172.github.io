@@ -175,7 +175,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/typescript/" style="color: #ffa2c4">
+                <a href="/tags/typescript/" style="color: #ff7d73">
                     typescript
                 </a>
             </span>
@@ -264,6 +264,14 @@ type Coord = [number, number, number?];  // 可选元组
 type B = {b: string}
 type C = A &amp; B
 </code></pre>
+<h4 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h4><p>允许在定义函数，类，接口时，使用类型参数表示未指定的类型，这些参数在具体使用时才指定类型。让代码适用于多种类型，并保持安全性</p>
+<pre><code class="language-typescript">function logData&lt;T&gt;(data: T){
+	console.log(data)
+}
+logData&lt;number&gt;(100)
+logData&lt;string&gt;(&#39;hello&#39;)
+</code></pre>
+<p>用<code>&lt;&gt;</code>声明时内部通常用T，也可自定。</p>
 
     </div>
     
