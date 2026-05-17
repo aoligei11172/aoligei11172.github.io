@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>时间对象 | 艾尔登之王的博客</title>
+    <title>Promise | 艾尔登之王的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,14 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>时间对象</h1>
+        <h1>Promise</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/18
+            2026/5/17
         </span>
         
         
@@ -175,7 +175,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/JavaScript/" style="color: #ffa2c4">
+                <a href="/tags/JavaScript/" style="color: #00a596">
                     JavaScript
                 </a>
             </span>
@@ -185,65 +185,65 @@
     </div>
     
     <div class="content" v-pre>
-        <h5 id="时间对象"><a href="#时间对象" class="headerlink" title="时间对象"></a>时间对象</h5><p>可以获得当前系统的时间</p>
-<h5 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h5><p>使用关键字<code>new</code></p>
-<p>获得当前时间&#x2F;指定时间</p>
-<p><code>const date = new Date();</code></p>
+        <h4 id="回调地狱"><a href="#回调地狱" class="headerlink" title="回调地狱"></a>回调地狱</h4><p>在异步编程中，过多嵌套的回调函数导致代码难以阅读、维护和排错的现象，即回调函数中嵌套回调</p>
 <span id="more"></span>
 
-<h5 id="日期对象方法"><a href="#日期对象方法" class="headerlink" title="日期对象方法"></a>日期对象方法</h5><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>作用</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>getFullYear()</td>
-<td>获得年份</td>
-<td>获取四位年份</td>
-</tr>
-<tr>
-<td>getMonth()</td>
-<td>获得月份</td>
-<td>取值为0~11</td>
-</tr>
-<tr>
-<td>getDate()</td>
-<td>获取月份中的每一天</td>
-<td>不同月份取值也不相同</td>
-</tr>
-<tr>
-<td>getDay()</td>
-<td>获取星期</td>
-<td>取值为0~6</td>
-</tr>
-<tr>
-<td>getHours()</td>
-<td>获取小时</td>
-<td>取值为0~23</td>
-</tr>
-<tr>
-<td>getMinutes()</td>
-<td>获取分钟</td>
-<td>取值为0~59</td>
-</tr>
-<tr>
-<td>getSeconds()</td>
-<td>获取秒</td>
-<td>取值为0~59</td>
-</tr>
-</tbody></table>
-<p>使用时需要根据返回值修改</p>
-<h5 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h5><p>指1970年1月1日00时00分00秒起到现在的毫秒数</p>
-<p><strong>获得时间戳</strong></p>
-<p>1.用getTime()</p>
-<p><code>const date = new Date()</code></p>
-<p>可以返回指定时间的时间戳</p>
-<p>2.Date.now</p>
-<p><code>console.log(Date.now())</code></p>
-<p>只能获取当前时间戳</p>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p><code>Promise</code>是 JavaScript 中为了解决<strong>回调地狱</strong>而诞生的异步编程方案</p>
+<p>是一种构造函数，通过new实例化对象</p>
+<pre><code class="language-javascript">const fn = new Promise((resolve, reject) =&gt; {
+  // 异步操作
+});
+</code></pre>
+<h4 id="promise实例"><a href="#promise实例" class="headerlink" title="promise实例"></a>promise实例</h4><p>实例中有两个属性</p>
+<ul>
+<li>state：状态</li>
+<li>result：结果</li>
+</ul>
+<h4 id="三种状态（state）"><a href="#三种状态（state）" class="headerlink" title="三种状态（state）"></a>三种状态（state）</h4><p><code>pending</code>(准备，待解决)</p>
+<p><code>fulfilled</code>(已完成，成功)</p>
+<p><code>rejected</code>(已拒绝，失败)</p>
+<p>通过调用<code>resolve()</code>和<code>reject()</code>来改变状态</p>
+<ul>
+<li>resolve() 改变为fulfilled</li>
+<li>reject()改变为rejected</li>
+</ul>
+<h4 id="结果（result）"><a href="#结果（result）" class="headerlink" title="结果（result）"></a>结果（result）</h4><p><code>resolve()</code>和<code>reject()</code>可以用来改变Promise的结果</p>
+<pre><code class="language-javascript">const fn = new Promise((resolve, reject) =&gt; {
+    resolve(&#39;hello&#39;);
+})
+console.dir(fn); 
+//输出：
+//    Promise
+//      [[Prototype]]: Promise
+//      [[PromiseState]]: &quot;fulfilled&quot;
+//      [[PromiseResult]]: &quot;hello&quot;
+</code></pre>
+<h4 id="then方法"><a href="#then方法" class="headerlink" title="then方法"></a>then方法</h4><p>是处理异步操作结果的核心方式</p>
+<pre><code class="language-javascript">promise.then(onFulfilled, onRejected);
+</code></pre>
+<ul>
+<li><code>onFulfilled</code>当Promise状态为fulfilled时执行，可以传入Promise 的 <strong>resolved 值</strong></li>
+<li><code>onRejected</code>当Promise状态为rejected时执行，可传入即 Promise 的 <strong>rejected 原因</strong></li>
+</ul>
+<p>二者只能传入一个参数。</p>
+<p>返回Promise对象，状态为pending。可以继续<code>.then()</code></p>
+<p>例如：</p>
+<pre><code class="language-javascript">const fn = new Promise((resolve, reject) =&gt; {
+    resolve(5);
+})
+fn.then((num) =&gt; {return num * 2})
+  .then((num) =&gt; console.log(num)); //输出10
+</code></pre>
+<h4 id="catch方法"><a href="#catch方法" class="headerlink" title="catch方法"></a>catch方法</h4><p>.catch()用于捕获Promise发生的错误，是.then(onRejected)的语法糖</p>
+<p>语法：</p>
+<pre><code class="language-javascript">promise.catch(onRejected);
+</code></pre>
+<p>例：</p>
+<pre><code class="language-javascript">const fn = new Promise((resolve,reject) =&gt; {
+    throw new Error(&#39;!出错了!&#39;);
+})
+fn.catch((onRejected) =&gt; console.log(onRejected)); //返回Error: !出错了!
+</code></pre>
 
     </div>
     
