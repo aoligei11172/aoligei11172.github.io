@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>艾尔登之王的博客</title>
+    <title>elden_lord的博客</title>
     <meta name="author" content="Elden Lord" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -61,7 +61,7 @@
         <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
     <nav id="desktop-menu">
         <a class="title" href="/">
-            <span>艾尔登之王的博客</span>
+            <span>ELDEN_LORD的博客</span>
         </a>
         
         <a href="/">
@@ -93,7 +93,7 @@
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
             <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;艾尔登之王的博客</span>
+            <span>&emsp;ELDEN_LORD的博客</span>
         </div>
         <transition name="slide">
             <div class="items" v-show="showMenuItems">
@@ -165,7 +165,7 @@
         <span class="loop"></span>
         <span class="info">
             <div class="wrap">
-                <h1>艾尔登之王的博客</h1>
+                <h1>elden_lord的博客</h1>
                 <h3></h3>
                 <h5></h5>
             </div>
@@ -179,6 +179,128 @@
 >
     <div id="home-posts">
         
+
+<div class="post">
+    <a href="/2026/09/28/DB2.0/">
+        <h2 class="post-title">等保2.0</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/9/28
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <hr>
+<h3 id="我对等保2-0的了解"><a href="#我对等保2-0的了解" class="headerlink" title="我对等保2.0的了解"></a>我对等保2.0的了解</h3><blockquote>
+<p>等保2.0不只是一套标准，更是《网络安全法》落地后网络运营者必须承担的安全责任，也是网警日常监管中最重要的抓手之一。</p>
+</blockquote>
+<h2 id="一、从等保1-0到等保2-0"><a href="#一、从等保1-0到等保2-0" class="headerlink" title="一、从等保1.0到等保2.0"></a>一、从等保1.0到等保2.0</h2><p>提到网络安全等级保护，很多人第一反应就是拿测评报告、应付检查。但在我看来，等保2.0不是一次简单的标准升级，而是安全思路的转变。</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>等保1.0</th>
+<th>等保2.0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>保护对象</td>
+<td>传统机房、信息系统</td>
+<td>云平台、移动互联、物联网、工控系统等</td>
+</tr>
+<tr>
+<td>防护思路</td>
+<td>静态防护、一次性合规</td>
+<td>持续安全、动态防护</td>
+</tr>
+<tr>
+<td>合规重点</td>
+<td>系统本身</td>
+<td>技术+管理，落实主体责任</td>
+</tr>
+<tr>
+<td>监管方式</td>
+<td>建好系统、做次测评</td>
+<td>全生命周期、持续运维、定期复评</td>
+</tr>
+</tbody></table>
+<p>以前的等保1.0，更多针对传统机房里的信息系统，偏向静态防护。随着云平台、小程序、物联网设备越来越普及，攻击手段也变得多样，老标准已经跟不上现实风险。2019年实施的等保2.0，把保护范围扩大了，不再有监管空白。</p>
+<h2 id="二、等保2-0最大的变化"><a href="#二、等保2-0最大的变化" class="headerlink" title="二、等保2.0最大的变化"></a>二、等保2.0最大的变化</h2><p><strong>从“一次性合规”变成“持续安全”。</strong></p>
+<p>它主要分为两部分：</p>
+<ul>
+<li><strong>技术要求</strong>：不只看防火墙、服务器这些硬件，还看重数据保护、日志审计、入侵检测、漏洞管理、备份恢复。</li>
+<li><strong>管理要求</strong>：更看重人、制度和流程，要有安全制度、人员培训、权限管理、应急预案和演练。</li>
+</ul>
+<blockquote>
+<p>俗话说：网络安全三分技术，七分管理。<br>很多安全事件，根源不是设备不行，而是管理缺位：账号乱开、漏洞长期不补、离职权限不回收、出事没有处置流程。</p>
+</blockquote>
+<h2 id="三、等保工作的完整流程"><a href="#三、等保工作的完整流程" class="headerlink" title="三、等保工作的完整流程"></a>三、等保工作的完整流程</h2><ol>
+<li><strong>定级</strong>：判断系统重要程度，确定等级。</li>
+<li><strong>备案</strong>：到公安网安部门备案。</li>
+<li><strong>测评</strong>：找测评机构排查风险，对照标准找差距。</li>
+<li><strong>整改</strong>：针对性修复漏洞、完善制度。</li>
+<li><strong>持续运维</strong>：定期自查、定期复评。</li>
+</ol>
+<p>可以用一个检查清单来理解：</p>
+<ul>
+<li><input disabled="" type="checkbox"> 系统是否完成定级？</li>
+<li><input disabled="" type="checkbox"> 是否到公安网安部门备案？</li>
+<li><input disabled="" type="checkbox"> 是否开展等级测评？</li>
+<li><input disabled="" type="checkbox"> 高危漏洞是否整改？</li>
+<li><input disabled="" type="checkbox"> 安全制度是否落地？</li>
+<li><input disabled="" type="checkbox"> 是否定期复评和持续运维？</li>
+</ul>
+<p><strong>测评合格不等于万事大吉。</strong> 系统业务在变，漏洞会不断出现，安全是长期工作。</p>
+<h2 id="四、常见误区"><a href="#四、常见误区" class="headerlink" title="四、常见误区"></a>四、常见误区</h2><p>很多单位把等保当成一项“考试”，目标只是拿到测评报告。但现实中，有些拿到等保测评报告的系统，依然存在大量高危漏洞，一旦被黑客攻击，可能造成业务中断、用户信息泄露。</p>
+<p>因此：</p>
+<blockquote>
+<p>等保测评只是手段，保护系统和数据安全才是目的。</p>
+</blockquote>
+<h2 id="五、我对等保2-0的理解"><a href="#五、我对等保2-0的理解" class="headerlink" title="五、我对等保2.0的理解"></a>五、我对等保2.0的理解</h2><p>落实等保2.0：</p>
+<ul>
+<li>一方面是<strong>履行法律义务</strong>。不落实等级保护，一旦发生网络安全事件，运营单位要承担相应法律责任。</li>
+<li>另一方面是<strong>保护自身业务</strong>。减少被入侵、数据泄露、业务中断的风险。</li>
+</ul>
+<p>网络安全不是网警单方面的监管工作，<strong>运营单位才是网络安全第一责任人</strong>。</p>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>总的来说，等保2.0本质上是一套落地的安全方法论。它用统一标准告诉我们：不同重要程度的系统，要匹配对应的安全防护能力。</p>
+<p>它要求安全建设跟着业务全生命周期走：</p>
+<ul>
+<li>事前规划</li>
+<li>事中防护</li>
+<li>事后应急</li>
+<li>持续改进</li>
+</ul>
+<p>在数字化越来越普及的今天，等保2.0就是一条底线，督促各单位守住网络安全关口，减少网络违法犯罪滋生的土壤，共同维护网络空间安全。</p>
+<hr>
+<p><em>以上是我对等保2.0的理解，仅代表个人学习总结。</em></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Security/" style="color: #00a596">Security</a>
+        </span>
+        
+    </div>
+    <a href="/2026/09/28/DB2.0/" class="go-post">阅读全文</a>
+</div>
 
 <div class="post">
     <a href="/2026/05/17/promise/">
@@ -212,7 +334,7 @@
         
         <span class="tag">
             
-            <a href="/tags/JavaScript/" style="color: #00bcd4">JavaScript</a>
+            <a href="/tags/JavaScript/" style="color: #ff7d73">JavaScript</a>
         </span>
         
     </div>
@@ -330,7 +452,7 @@
         
         <span class="tag">
             
-            <a href="/tags/JavaScript/" style="color: #00bcd4">JavaScript</a>
+            <a href="/tags/JavaScript/" style="color: #00a596">JavaScript</a>
         </span>
         
     </div>
@@ -369,7 +491,7 @@
         
         <span class="tag">
             
-            <a href="/tags/JavaScript/" style="color: #00a596">JavaScript</a>
+            <a href="/tags/JavaScript/" style="color: #00bcd4">JavaScript</a>
         </span>
         
     </div>
@@ -450,7 +572,7 @@
         
         <span class="tag">
             
-            <a href="/tags/JavaScript/" style="color: #ff7d73">JavaScript</a>
+            <a href="/tags/JavaScript/" style="color: #00bcd4">JavaScript</a>
         </span>
         
     </div>
@@ -544,53 +666,11 @@
         
         <span class="tag">
             
-            <a href="/tags/JavaScript/" style="color: #03a9f4">JavaScript</a>
+            <a href="/tags/JavaScript/" style="color: #00a596">JavaScript</a>
         </span>
         
     </div>
     <a href="/2026/04/19/webAPIs-6/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/18/webAPIs-5/">
-        <h2 class="post-title">时间对象</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/18
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h5 id="时间对象"><a href="#时间对象" class="headerlink" title="时间对象"></a>时间对象</h5><p>可以获得当前系统的时间</p>
-<h5 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h5><p>使用关键字<code>new</code></p>
-<p>获得当前时间&#x2F;指定时间</p>
-<p><code>const date = new Date();</code></p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/JavaScript/" style="color: #03a9f4">JavaScript</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/18/webAPIs-5/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -645,7 +725,7 @@
     <div id="footer-wrap">
         <div>
             &copy;
-            2022 - 2026 艾尔登之王的博客
+            2022 - 2026 elden_lord的博客
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>
