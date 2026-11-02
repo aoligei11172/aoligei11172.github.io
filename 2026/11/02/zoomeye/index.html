@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>网络空间测绘引擎对比与子域名收集实践 | elden_lord的博客</title>
+    <meta name="author" content="Elden Lord" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>ELDEN_LORD的博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;ELDEN_LORD的博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>网络空间测绘引擎对比与子域名收集实践</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/11/2
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Security/" style="color: #00bcd4">
+                    Security
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <blockquote>
+<p>声明：本文所有检索均为平台侧公开数据查询，未向任何目标发送探测请求，未进行扫描与爆破，仅用于课程作业。文中 IP 为搜索引擎已收录的公开记录。</p>
+</blockquote>
+<h2 id="一、和-ZoomEye-类似的网站"><a href="#一、和-ZoomEye-类似的网站" class="headerlink" title="一、和 ZoomEye 类似的网站"></a>一、和 ZoomEye 类似的网站</h2><table>
+<thead>
+<tr>
+<th>网站</th>
+<th>国家</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ZoomEye</td>
+<td>中国</td>
+<td>指纹多，中文资产多</td>
+</tr>
+<tr>
+<td>Shodan</td>
+<td>美国</td>
+<td>最早，端口&#x2F;设备最全</td>
+</tr>
+<tr>
+<td>Censys</td>
+<td>美国</td>
+<td>擅长证书检索</td>
+</tr>
+<tr>
+<td>FOFA</td>
+<td>中国</td>
+<td>国内最常用，语法强</td>
+</tr>
+<tr>
+<td>360 Quake</td>
+<td>中国</td>
+<td>中文资产多，可看原始响应</td>
+</tr>
+<tr>
+<td>Hunter 鹰图</td>
+<td>中国</td>
+<td>按单位查资产</td>
+</tr>
+</tbody></table>
+<h2 id="二、ZoomEye-搜索演示"><a href="#二、ZoomEye-搜索演示" class="headerlink" title="二、ZoomEye 搜索演示"></a>二、ZoomEye 搜索演示</h2><h3 id="2-1-按域名查：domain-github-com"><a href="#2-1-按域名查：domain-github-com" class="headerlink" title="2.1 按域名查：domain:&quot;github.com&quot;"></a>2.1 按域名查：<code>domain:&quot;github.com&quot;</code></h3><p><img src="/images/01-zoomeye-github.png" alt="domain:&quot;github.com&quot; 检索结果"></p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>命中总数</td>
+<td>53,308 条</td>
+</tr>
+<tr>
+<td>近一年</td>
+<td>31,008 条</td>
+</tr>
+<tr>
+<td>耗时</td>
+<td>1.228 秒</td>
+</tr>
+<tr>
+<td>设备</td>
+<td>52,458（IPv4 52,454 &#x2F; IPv6 4）</td>
+</tr>
+<tr>
+<td>网站</td>
+<td>850</td>
+</tr>
+</tbody></table>
+<p><strong>三点观察：</strong></p>
+<ol>
+<li>IPv4 有 5 万多条，IPv6 只有 4 条，说明 IPv6 资产基本没被收录，是观测盲区。</li>
+<li>总数 5.3 万但近一年只有 3.1 万，说明库里存的是历史扫描记录，<strong>命中条数 ≠ 资产个数</strong>。</li>
+<li>结果里出现了 <code>drafts.misty.moe</code>、<code>162.35.243.250</code> 这类<strong>不是 github.com 子域名</strong>的记录，说明 <code>domain:</code> 匹配范围比预想宽，会命中页面或证书里引用了该域名的主机。所以它适合看「暴露了什么」，不适合当子域名清单。</li>
+</ol>
+<h3 id="2-2-按组件查：app-Open-WebUI"><a href="#2-2-按组件查：app-Open-WebUI" class="headerlink" title="2.2 按组件查：app=&quot;Open WebUI&quot;"></a>2.2 按组件查：<code>app=&quot;Open WebUI&quot;</code></h3><p><img src="/images/02-zoomeye-openwebui.png" alt="app&#x3D;&quot;Open WebUI&quot; 检索结果"></p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>命中总数</td>
+<td>93,123 条</td>
+</tr>
+<tr>
+<td>近一年</td>
+<td>48,197 条</td>
+</tr>
+<tr>
+<td>耗时</td>
+<td>0.272 秒</td>
+</tr>
+</tbody></table>
+<p><strong>样本</strong>：<code>196.221.164.57:9898</code>，埃及开罗，标题 <code>Open WebUI</code>，响应头 <code>server: uvicorn</code>。</p>
+<p><strong>观察</strong>：Open WebUI 默认端口是 3000，这里改成了 9898，但还是被扫到了——<strong>改默认端口没用</strong>。<code>uvicorn</code> 说明前面没有 Nginx 之类的反向代理，服务是直接暴露的。这类自建 AI 面板近一年增长很快（近一年占一半以上），通常默认口令简单甚至无鉴权。</p>
+<h3 id="2-3-按语言查：app-PHP"><a href="#2-3-按语言查：app-PHP" class="headerlink" title="2.3 按语言查：app=&quot;PHP&quot;"></a>2.3 按语言查：<code>app=&quot;PHP&quot;</code></h3><p><img src="/images/03-zoomeye-php.png" alt="app&#x3D;&quot;PHP&quot; 检索结果"></p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>命中总数</td>
+<td>111,076,437 条</td>
+</tr>
+<tr>
+<td>近一年</td>
+<td>24,989,076 条</td>
+</tr>
+<tr>
+<td>设备</td>
+<td>94,521,305</td>
+</tr>
+<tr>
+<td>网站</td>
+<td>16,555,132</td>
+</tr>
+<tr>
+<td>耗时</td>
+<td>1.109 秒</td>
+</tr>
+</tbody></table>
+<p><strong>样本</strong>：<code>license.processmaker.com:443</code>，响应头是</p>
+<pre><code>Server: Apache/2.4.61 (Amazon) OpenSSL/1.0.2k-fips PHP/5.4.45
+</code></pre>
+<p><strong>观察</strong>：一个 <code>Server</code> 头就把三个组件的精确版本全暴露了。</p>
+<ul>
+<li><code>PHP/5.4.45</code>：PHP 5.4 分支 2015 年就停止支持了</li>
+<li><code>OpenSSL/1.0.2k</code>：1.0.2 系列 2019 年底维护结束</li>
+<li><code>Apache/2.4.61</code>：相对较新</li>
+</ul>
+<p>也就是说运维升级过 Apache，但应用层没跟上。反过来看另一条样本只返回 <code>Server: Apache</code>（不带版本号），信息更少，反而更安全。</p>
+<blockquote>
+<p>防守动作：关掉 banner 里的版本号（<code>ServerTokens Prod</code>、<code>expose_php = Off</code>），并盯着组件的停止支持时间。</p>
+</blockquote>
+<h2 id="三、子域名收集"><a href="#三、子域名收集" class="headerlink" title="三、子域名收集"></a>三、子域名收集</h2><h3 id="3-1-两类方法"><a href="#3-1-两类方法" class="headerlink" title="3.1 两类方法"></a>3.1 两类方法</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>做法</th>
+<th>是否碰目标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>被动收集</td>
+<td>查证书日志、DNS 数据集、测绘引擎已有记录</td>
+<td>不碰</td>
+</tr>
+<tr>
+<td>主动爆破</td>
+<td>用字典向目标 DNS 发大量查询</td>
+<td>碰，<strong>必须有授权</strong></td>
+</tr>
+</tbody></table>
+<p>本次只做被动收集，示例目标用公开域名 <code>github.com</code>。</p>
+<h3 id="3-2-拿清单"><a href="#3-2-拿清单" class="headerlink" title="3.2 拿清单"></a>3.2 拿清单</h3><p>两种方式都能拿到子域名清单：</p>
+<ul>
+<li><strong>SecurityTrails</strong>：<code>securitytrails.com</code> 搜 <code>github.com</code>，页面下方 <code>A Records</code> 表格的 Host 列就是子域名。</li>
+<li><strong>公开 DNS 采集接口</strong>：如 HackerTarget 的 hostsearch，直接返回 <code>子域名,IP</code> 的表格。</li>
+</ul>
+<p>下面是通过公开 DNS 接口实际查到的部分结果（单次返回前 50 条）：</p>
+<table>
+<thead>
+<tr>
+<th>子域名</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>accelerator.github.com</td>
+<td>185.199.110.153</td>
+</tr>
+<tr>
+<td>accessibility.github.com</td>
+<td>185.199.111.153</td>
+</tr>
+<tr>
+<td>action.github.com</td>
+<td>185.199.108.153</td>
+</tr>
+<tr>
+<td>api.github.com</td>
+<td>140.82.113.5</td>
+</tr>
+<tr>
+<td>codeload.github.com</td>
+<td>140.82.114.9</td>
+</tr>
+<tr>
+<td>classroom.github.com</td>
+<td>140.82.114.17</td>
+</tr>
+<tr>
+<td>copilot.github.com</td>
+<td>140.82.113.18</td>
+</tr>
+<tr>
+<td>community.github.com</td>
+<td>140.82.114.18</td>
+</tr>
+<tr>
+<td>cdn-185-199-108-153.github.com</td>
+<td>185.199.108.153</td>
+</tr>
+<tr>
+<td>admin.github.com</td>
+<td>140.82.114.23</td>
+</tr>
+</tbody></table>
+<p><strong>两点观察：</strong></p>
+<ol>
+<li>IP 高度集中在两个网段：<code>185.199.x.x</code>（GitHub Pages 静态托管）和 <code>140.82.11x.x</code>（GitHub 主站集群）。看到网段基本就能判断这台主机是「静态页」还是「业务接口」。</li>
+<li>有些子域名把 IP 直接写进了名字，比如 <code>cdn-185-199-108-153.github.com</code>——<strong>命名规则本身就是信息泄露</strong>，连查都不用查。</li>
+</ol>
+<h3 id="3-3-用证书日志补漏"><a href="#3-3-用证书日志补漏" class="headerlink" title="3.3 用证书日志补漏"></a>3.3 用证书日志补漏</h3><p>HTTPS 证书里会写清楚签发时的全部域名，所以证书日志能查到页面上看不到的子域名：</p>
+<pre><code>https://crt.sh/?q=%25.github.com
+</code></pre>
+<p>很多公司内部系统、测试环境就是从证书日志里被翻出来的，属于典型的「影子资产」。</p>
+<h3 id="3-4-三个数据源的区别"><a href="#3-4-三个数据源的区别" class="headerlink" title="3.4 三个数据源的区别"></a>3.4 三个数据源的区别</h3><table>
+<thead>
+<tr>
+<th>数据源</th>
+<th>能查到什么</th>
+<th>局限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ZoomEye</td>
+<td>端口、服务、banner、标题</td>
+<td>只收录被扫过的主机，<code>domain:</code> 会串入非子域记录</td>
+</tr>
+<tr>
+<td>SecurityTrails &#x2F; DNS 接口</td>
+<td>子域名 + IP，覆盖全</td>
+<td>看不到服务暴露情况</td>
+</tr>
+<tr>
+<td>crt.sh</td>
+<td>隐藏的子域名</td>
+<td>通配符证书噪声多</td>
+</tr>
+</tbody></table>
+<p><strong>结论</strong>：测绘引擎看「跑什么服务」，DNS 数据集看「有哪些子域名」，证书日志补漏，三者要一起用。</p>
+<h3 id="3-5-访问验证"><a href="#3-5-访问验证" class="headerlink" title="3.5 访问验证"></a>3.5 访问验证</h3><p>从清单里挑几个打开，确认是不是活的站点：</p>
+<table>
+<thead>
+<tr>
+<th>子域名</th>
+<th>页面</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>api.github.com</td>
+<td>返回 JSON，说明是接口服务</td>
+</tr>
+<tr>
+<td>gist.github.com</td>
+<td>代码片段服务</td>
+</tr>
+<tr>
+<td>education.github.com</td>
+<td>教育服务</td>
+</tr>
+</tbody></table>
+<p>访问时只用浏览器打开首页看一眼，不做任何点击以外的操作。</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><ol>
+<li>测绘引擎各有侧重，做资产梳理要多平台交叉比对。</li>
+<li>看懂数字口径：<code>总数</code> 和 <code>近一年</code>、<code>设备</code> 和 <code>网站</code> 差别很大，引用时必须写清。</li>
+<li>banner 本身就是情报：一个响应头就能看出组件有没有停在旧版本上。</li>
+<li>语法要实测：<code>domain:</code> 会命中非子域记录，不试就照抄容易出错。</li>
+<li>全程只查公开数据，不做主动探测。</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 elden_lord的博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Elden Lord
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="aoligei11172/aoligei11172.github.io"
+    data-repo-id="R_kgDOR5V77g"
+    data-category="General"
+    data-category-id="DIC_kwDOR5V77s4DKNkA"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+    
+</body>
+</html>
